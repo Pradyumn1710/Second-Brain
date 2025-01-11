@@ -1,16 +1,15 @@
 import express  from 'express'
-import mainRouter from './routes/app.ts'
+import {router} from './routes/app'
+import cors  from 'cors'
 
 
 const app = express()
 
 
 app.use(express.json())
-app.use('/',mainRouter)
+app.use(cors())
 
-
-
-
+app.use('/routes',router)
 
 
 app.listen(3000,()=>

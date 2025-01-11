@@ -1,6 +1,8 @@
 import express from 'express'
-export const user_auth = express.Router()
+import { Router , Request , Response } from 'express'
 import {z} from 'zod'
+
+export const user_auth = express.Router()
 
 enum StatusCodes {
     OK = 200 ,
@@ -18,8 +20,14 @@ const userSchema = z.object({
     lastName : z.string(),
     password : z.string()
 })
+interface Signup extends Request{
+   body:{ username : string ,
+    firstname : string ,
+    lastname : string ,
+    password : string }
+}
 
-user_auth.post("/signup",(req,res)=>{
+user_auth.post("/signup",(req : Signup ,res : Response)=>{
     const userDetails = userSchema.safeParse(req.body)
     if(!userDetails){
         res.status(StatusCodes.BadRequest).send(Error.WI)
