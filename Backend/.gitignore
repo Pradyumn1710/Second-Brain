@@ -3,3 +3,7 @@ node_modules/
 
 # Environment variables
 .env
+
+# Configuration file
+config.ts
+config.js
