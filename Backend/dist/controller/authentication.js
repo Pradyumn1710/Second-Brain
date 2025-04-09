@@ -98,7 +98,9 @@ const signupHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const jwtSecret = config_1.essential.JWT_PASSWORD;
         if (!jwtSecret)
             throw new Error("JWT_SECRET not defined");
-        const token = jsonwebtoken_1.default.sign({ username: newUser.username }, jwtSecret, { expiresIn: '1h' });
+        const token = jsonwebtoken_1.default.sign({ username: newUser.username,
+            userId: newUser._id.toString()
+        }, jwtSecret, { expiresIn: '1h' });
         res.cookie('token', token, {
             httpOnly: true,
             sameSite: 'strict',

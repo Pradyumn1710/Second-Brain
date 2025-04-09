@@ -111,7 +111,9 @@ export const signupHandler: RequestHandler = async (req: Request, res: Response)
         if (!jwtSecret) throw new Error("JWT_SECRET not defined");
 
         const token = jwt.sign(
-            { username: newUser.username },
+            { username: newUser.username,
+                userId: newUser._id.toString()
+             },
             jwtSecret,
             { expiresIn: '1h' }
         );
